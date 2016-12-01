@@ -13,7 +13,6 @@
     },
     "autoload": {
         "psr-4": {
-            "Game\\App\\": "src/App/",
             "Game\\Models\\": "src/Models/",
             "Game\\Views\\": "src/Views/",
             "Game\\Controllers\\": "src/Controllers/"

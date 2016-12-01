@@ -1,11 +1,11 @@
 <?php
-use kahlan\filter\Filter as Filter;
-use kahlan\jit\Interceptor;
-use kahlan\reporter\Coverage;
-use kahlan\jit\patcher\Layer;
+use Kahlan\Filter\Filter as Filter;
+use Kahlan\Jit\Interceptor;
+use Kahlan\Reporter\Coverage;
+use Kahlan\Jit\Patcher\Layer;
 
 Filter::register('mycustom.namespaces', function($chain) {
-    $this->_autoloader->addPsr4('Editor\\', __DIR__ . '/src');
+    $this->_autoloader->addPsr4('Game\\', __DIR__ . '/src');
 });
 
 Filter::apply($this, 'namespaces', 'mycustom.namespaces');
