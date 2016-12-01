@@ -2,6 +2,7 @@
 use Kahlan\Filter\Filter as Filter;
 use Kahlan\Jit\Interceptor;
 use Kahlan\Reporter\Coverage;
+use Kahlan\Reporter\Coverage\Driver\Xdebug;
 use Kahlan\Jit\Patcher\Layer;
 
 Filter::register('mycustom.namespaces', function($chain) {
@@ -24,18 +25,6 @@ Filter::apply($this, 'patchers', 'api.patchers');
 //  */
 Filter::register('app.coverage', function($chain) {
     $reporters = $this->reporters();
-
-    if ($this->args()->exists('coverage')) {
-        // Limit the Coverage analysis to only a couple of directories only
-        $coverage = new Coverage([
-                'verbosity' => $this->args()->get('coverage'),
-                'driver' => new \kahlan\reporter\coverage\driver\Xdebug(),
-                'path' => [
-                    'src'
-                ]
-        ]);
-        $reporters->add('coverage', $coverage);
-    }
 
     return $reporters;
 });
