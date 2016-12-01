@@ -4,7 +4,7 @@
     /**
     * The home page controller
     */
-    class Controller
+    class Bee
     {
         private $model;
 
