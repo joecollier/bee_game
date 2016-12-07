@@ -2,7 +2,7 @@
     namespace Game\Views;
 
     /**
-    * The home page view
+    * The application view
     */
     class View
     {

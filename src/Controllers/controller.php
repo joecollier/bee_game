@@ -2,7 +2,8 @@
     namespace Game\Controllers;
 
     /**
-    * The home page controller
+    * The application controller used to render page and
+    * displaying messages
     */
     class Bee
     {

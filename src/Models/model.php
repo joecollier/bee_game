@@ -2,7 +2,7 @@
     namespace Game\Models;
 
     /**
-    * The home page model
+    * The application model needed to render page
     */
     class Model
     {
