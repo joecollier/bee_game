@@ -13,6 +13,12 @@
             'worker' => 10
         ];
 
+        protected $count_per_type = [
+            'drone' => 8,
+            'queen' => 1,
+            'worker' => 5
+        ];
+
         function __construct($bee)
         {
             $this->bee = $bee;
