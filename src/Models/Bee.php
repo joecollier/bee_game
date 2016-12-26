@@ -7,7 +7,7 @@
     class Bee
     {
         public $type;
-        protected $id;
+        public $id;
         public $hitpoints;
 
         /**
@@ -62,9 +62,9 @@
         protected function getDefaultHitpointsByType($type)
         {
             $hitpoints_by_type = [
-                'drone' => 100,
-                'queen' => 200,
-                'worker' => 300
+                'drone' => 75,
+                'queen' => 100,
+                'worker' => 50
             ];
 
             return $hitpoints_by_type[$type];
@@ -92,18 +92,19 @@
             return $this->hitpoints;
         }
 
-        // public function getUniqueId()
-        // {
+        public function deductHP()
+        {
+            $damage_by_type = [
+                'queen' => 40,
+                'drone' => 60,
+                'worker' => 60
+            ];
 
-        // }
+            $new_hp = $this->getBeeHitpoints() - $damage_by_type[$this->getBeeType()];
+            $new_hp = ($new_hp > 0)
+                ? $new_hp
+                : 0;
 
-        // /**
-        //  * Returns integer denoting the current health status of the bee
-        //  *
-        //  * @return int $points
-        //  */
-        // public function getCurrentHitPoints()
-        // {
-
-        // }
+            $this->setBeeHitpoints($new_hp);
+        }
     }

@@ -13,9 +13,4 @@
         {
             $this->model = $model;
         }
-
-        public function render()
-        {
-            return $this->model->displayMessage();
-        }
     }

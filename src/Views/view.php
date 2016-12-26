@@ -14,11 +14,12 @@
             $this->controller = $controller;
             $this->model = $model;
 
-            print "Home - ";
+            $this->displayPage();
         }
 
-        public function index()
+        public function displayPage()
         {
-            return $this->controller->render();
+            $template = __DIR__ . '/index.html';
+            echo file_get_contents($template);
         }
     }

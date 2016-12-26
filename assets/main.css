@@ -1,0 +1,17 @@
+#container {
+    width: 480px;
+    height: 360px;
+    border: 1px solid black;
+}
+
+#button {
+    background-color: #beeeee;
+    border: 1px solid black;
+    width: 16%;
+    height: 9%;
+}
+
+#bee-counts {
+    width:40%;
+    padding: 0 60% 0 0;
+}
