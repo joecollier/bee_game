@@ -95,9 +95,9 @@
         public function deductHP()
         {
             $damage_by_type = [
-                'queen' => 40,
-                'drone' => 60,
-                'worker' => 60
+                'queen' => 8,
+                'drone' => 5,
+                'worker' => 10
             ];
 
             $new_hp = $this->getBeeHitpoints() - $damage_by_type[$this->getBeeType()];

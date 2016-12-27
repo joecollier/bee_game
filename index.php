@@ -15,5 +15,5 @@
     $game_controller = new GameController();
     $game_controller->initializeGame();
 
-    new View($display_controller, $model);
+    new View($display_controller);
 ?>

@@ -6,20 +6,18 @@
     */
     class View
     {
-        private $model;
         private $controller;
 
-        function __construct($controller, $model)
+        function __construct($controller)
         {
             $this->controller = $controller;
-            $this->model = $model;
 
             $this->displayPage();
         }
 
         public function displayPage()
         {
-            $template = __DIR__ . '/index.html';
+            $template = __DIR__ . '/index.html.php';
             echo file_get_contents($template);
         }
     }
