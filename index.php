@@ -22,7 +22,8 @@
         [
             'game_data' => $game_data,
             'counts' => $data_handler->getCounts($game_data),
-            'hit_count' => $data_handler->getHitCount($_SESSION)
+            'hit_count' => $data_handler->getHitCount($_SESSION),
+            'last_hit' => $data_handler->getLastHit($_SESSION)
         ]
     );
 ?>

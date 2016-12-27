@@ -52,4 +52,16 @@
 
             return $this->counts;
         }
+
+        /**
+         * [getLastHit description]
+         * @param  [type] $data [description]
+         * @return [type]       [description]
+         */
+        public function getLastHit($data)
+        {
+            return isset ($data['last_hit_type'])
+                ? $data['last_hit_type']
+                : null;
+        }
     }

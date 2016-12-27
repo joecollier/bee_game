@@ -9,10 +9,16 @@
         public $type;
         public $id;
         public $hitpoints;
-        protected $damage_by_type = [
-            'queen' => 80,
+        protected $damage_taken_by_type = [
+            'queen' => 8,
+            'drone' => 12,
+            'worker' => 10
+        ];
+
+        protected $hitpoints_by_type = [
             'drone' => 50,
-            'worker' => 100
+            'queen' => 100,
+            'worker' => 75
         ];
 
         /**
@@ -66,13 +72,7 @@
 
         protected function getDefaultHitpointsByType($type)
         {
-            $hitpoints_by_type = [
-                'drone' => 75,
-                'queen' => 100,
-                'worker' => 50
-            ];
-
-            return $hitpoints_by_type[$type];
+            return $this->hitpoints_by_type[$type];
         }
 
         /**
@@ -97,9 +97,13 @@
             return $this->hitpoints;
         }
 
+        /**
+         * [deductHP description]
+         * @return [type] [description]
+         */
         public function deductHP()
         {
-            $new_hp = $this->getBeeHitpoints() - $this->damage_by_type[$this->getBeeType()];
+            $new_hp = $this->getBeeHitpoints() - $this->damage_taken_by_type[$this->getBeeType()];
             $new_hp = ($new_hp > 0)
                 ? $new_hp
                 : 0;

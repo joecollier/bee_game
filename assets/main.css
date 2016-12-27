@@ -20,6 +20,13 @@
     width:30%;
     float:left;
 }
+
+.bee-status-type-bold {
+    width:30%;
+    float:left;
+    font-weight: bold;
+}
+
 .bee-status-count {
     width:70%;
     float:left;

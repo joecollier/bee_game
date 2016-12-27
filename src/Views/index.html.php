@@ -12,7 +12,12 @@
                         if ($counts['queen'] > 0) {
                             echo "<div style='height:100%;'>Status<div>";
                             foreach ($counts as $type => $count) {
-                                echo "<div class='bee-status-type'>Remaining {$type}s:</div>";
+                                $bold = '';
+                                if ($last_hit == $type) {
+                                    $bold = '-bold';
+                                }
+
+                                echo "<div class='bee-status-type{$bold}'>Remaining {$type}s:</div>";
                                 echo "<div class='bee-status-count'>{$count}</div>";
                             }
                             echo "<div>{$hit_count} hits</div>";

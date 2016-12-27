@@ -49,6 +49,7 @@
         protected function damageBee(Bee $bee)
         {
             $bee->deductHP();
+            $_SESSION['last_hit_type'] = $bee->type;
 
             if ($bee->getBeeHitpoints() <= 0) {
                 unset($_SESSION['game_data'][$bee->id]);
