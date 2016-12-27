@@ -12,6 +12,15 @@
 }
 
 #bee-counts {
-    width:40%;
+    width:100%;
     padding: 0 60% 0 0;
+}
+
+.bee-status-type {
+    width:30%;
+    float:left;
+}
+.bee-status-count {
+    width:70%;
+    float:left;
 }

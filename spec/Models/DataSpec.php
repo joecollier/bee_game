@@ -3,7 +3,7 @@
 
     use Game\Models\Data;
 
-    fdescribe(Data::class, function () {
+    xdescribe(Data::class, function () {
         $this->data = new Data();
 
         var_dump($this->data->getBeeArray(), 37373);

@@ -3,7 +3,7 @@
 
     use Game\Models\Bee;
 
-    describe(BeeController::class, function () {
+    xdescribe(BeeController::class, function () {
         describe('::deductHitPoints', function () {
             it('deducts hitpoints of a queen with 200 current hitpoints', function () {
                 $this->bee = new Bee('queen');

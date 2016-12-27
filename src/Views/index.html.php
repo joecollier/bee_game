@@ -1,30 +1,32 @@
-<?php
-    echo '93rij3=jkjkd';
-?>
-
 <DOCTYPE html>
 <html>
     <head>
         <link rel='stylesheet' type='text/css' href='assets/main.css' />
     </head>
-
     <body>
         <div id="container">
             <center>
                 <div id="title">Welcome to the Bee Game!</div>
-
-                <div id="bee-counts">
-                    Bee Count<br>
-                    Queens: 1 <?php (echo 100); ?><br>
-<!--                     Workers: <?php echo($_SESSION['game_data']['worker']);?><br>
-                    Drones: <?php echo($_SESSION['game_data']['drone']);?><br> -->
+                <div id='bee-counts' style='height:220px;'>
+                    <?php
+                        if ($counts['queen'] > 0) {
+                            echo "<div style='height:100%;'>Status<div>";
+                            foreach ($counts as $type => $count) {
+                                echo "<div class='bee-status-type'>Remaining {$type}s:</div>";
+                                echo "<div class='bee-status-count'>{$count}</div>";
+                            }
+                            echo "<div>{$hit_count} hits</div>";
+                        } else {
+                            echo "<div style='height:100%;'>Game completed in {$hit_count} hits</div>";
+                        }
+                    ?>
+                    <div>
+                        <form method="post" action="index.php">
+                            <input id="button" type="submit" value="hit" name="submit">
+                        </form>
+                    </div>
                 </div>
-                <form method="post" action="index.php">
-                    <input id="button" type="submit" value="hit" name="submit">
-                </form>
             </center>
         </div>
-
-        <div style="display:none;"><?php var_dump($_SESSION['colony']); ?></div>
     </body>
 </html>

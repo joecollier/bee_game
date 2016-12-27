@@ -9,6 +9,11 @@
         public $type;
         public $id;
         public $hitpoints;
+        protected $damage_by_type = [
+            'queen' => 80,
+            'drone' => 50,
+            'worker' => 100
+        ];
 
         /**
          * [__construct description]
@@ -94,13 +99,7 @@
 
         public function deductHP()
         {
-            $damage_by_type = [
-                'queen' => 8,
-                'drone' => 5,
-                'worker' => 10
-            ];
-
-            $new_hp = $this->getBeeHitpoints() - $damage_by_type[$this->getBeeType()];
+            $new_hp = $this->getBeeHitpoints() - $this->damage_by_type[$this->getBeeType()];
             $new_hp = ($new_hp > 0)
                 ? $new_hp
                 : 0;

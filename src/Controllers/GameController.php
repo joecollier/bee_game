@@ -15,11 +15,11 @@
             'worker' => 5
         ];
 
-        protected $colony = [];
+        protected $all_bees = [];
 
         /**
          * Builds array containing "bee" data
-         * @return $colony
+         * @return $all_bees
          */
         protected function buildBees()
         {
@@ -29,7 +29,6 @@
             foreach ($this->default_bee_counts as $bee_type => $count) {
                 while ($i < $count) {
                     $bee = new Bee($bee_type, $id);
-                    // $colony[$bee_type][$id] = (array) $bee;
                     $this->colony[$id] = $bee;
 
                     $i++;
@@ -60,16 +59,8 @@
             }
         }
 
-        /**
-         * Initiliazes session and game data
-         */
-        public function initializeGame()
+        protected function nextStep()
         {
-            if (isset($_SESSION)) {
-                session_destroy();
-            }
-            session_start();
-
             if (
                 isset($_SESSION['game_data']) &&
                 isset($_POST['submit']) &&
@@ -77,14 +68,23 @@
             ) {
                 $rand_id = array_rand($_SESSION['game_data']);
                 $this->damageBee($_SESSION['game_data'][$rand_id]);
+                $_SESSION['hit_count']++;
             } else {
-                $_SESSION = ['game_data' => $this->buildBees()];
+                $_SESSION = ['game_data' => $this->buildBees(), 'hit_count' => 0];
             }
+        }
 
-            if (isset($_SESSION['game_data'])) {
-                foreach ($_SESSION['game_data'] as $data) {
-                    echo '<pre>' . var_dump((array) $data, true) . '</pre>';
-                }
+        /**
+         * Initiliazes session and game data
+         */
+        public function initializeGame()
+        {
+            if (isset($_SESSION)) {
+                session_destroy();
+                $_SESSION['hit_count'] = 0;
             }
+            session_start();
+
+            $this->nextStep();
         }
     }

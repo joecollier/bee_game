@@ -2,15 +2,54 @@
     namespace Game\Helpers;
 
     /**
-    */
+     * Manipulates current game data in order to render values
+     * needed by the View
+     */
     class DataHandler
     {
-        public function generateNewSessionId()
-        {
-            date_default_timezone_set('GMT');
-            $date = date_create();
-            $timestamp = date_timestamp_get(date_create());
+        public $counts = [
+            'drone' => 0,
+            'queen' => 0,
+            'worker' => 0
+        ];
 
-            var_dump(md5($timestamp+rand(0, 100000)));
+        /**
+         * [formatSessionData description]
+         * @param  [type] $data [description]
+         * @return [type]       [description]
+         */
+        public function formatSessionData($data)
+        {
+            if (isset($data['game_data'])) {
+                return $data['game_data'];
+            }
+
+            return null;
+        }
+
+        /**
+         * [getHitCount description]
+         * @param  [type] $data [description]
+         * @return [type]       [description]
+         */
+        public function getHitCount($data)
+        {
+            return $data['hit_count'];
+        }
+
+        /**
+         * [getCounts description]
+         * @param  [type] $game_data [description]
+         * @return [type]            [description]
+         */
+        public function getCounts($game_data)
+        {
+            if (!empty($game_data)) {
+                foreach ($game_data as $data) {
+                    $this->counts[$data->type]++;
+                }
+            }
+
+            return $this->counts;
         }
     }
