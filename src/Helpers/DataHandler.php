@@ -14,7 +14,8 @@
         ];
 
         /**
-         * [formatSessionData description]
+         * Formats the data for use of the view class
+         *
          * @param  [type] $data [description]
          * @return [type]       [description]
          */
@@ -28,9 +29,12 @@
         }
 
         /**
-         * [getHitCount description]
-         * @param  [type] $data [description]
-         * @return [type]       [description]
+         * Returns a count from the game data to keep track of
+         * how many times the user has hit the submit button during
+         * this current iteration of the game session
+         *
+         * @param array $data
+         * @return int
          */
         public function getHitCount($data)
         {
@@ -38,9 +42,11 @@
         }
 
         /**
-         * [getCounts description]
-         * @param  [type] $game_data [description]
-         * @return [type]            [description]
+         * Returns an array containing an interger count
+         * for each type of bee remaining
+         *
+         * @param array $game_data
+         * @return array
          */
         public function getCounts($game_data)
         {
@@ -54,9 +60,11 @@
         }
 
         /**
-         * [getLastHit description]
-         * @param  [type] $data [description]
-         * @return [type]       [description]
+         * Returns the type of the last bee to receive a hit
+         * for UX purposes
+         *
+         * @param array $data
+         * @return string|null
          */
         public function getLastHit($data)
         {

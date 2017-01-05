@@ -21,7 +21,7 @@
          * Builds array containing "bee" data
          * @return $all_bees
          */
-        protected function buildBees()
+        public function buildBees()
         {
             $i = 0;
             $id = 1;
@@ -46,7 +46,7 @@
             unset($_SESSION['game_data']);
         }
 
-        protected function damageBee(Bee $bee)
+        public function damageBee(Bee $bee)
         {
             $bee->deductHP();
             $_SESSION['last_hit_type'] = $bee->type;

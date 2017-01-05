@@ -35,9 +35,9 @@
         }
 
         /**
-         * Type of bee object
+         * Sets the type of bee
          *
-         * @param string $type
+         * @param string $type i.e. worker, drone, queen
          */
         protected function setBeeType($type)
         {
@@ -45,7 +45,9 @@
         }
 
         /**
-         * @return $type
+         * Returns the type of bee
+         *
+         * @return string i.e. worker, drone, queen
          */
         public function getBeeType()
         {
@@ -53,9 +55,9 @@
         }
 
         /**
-         * Type of bee object
+         * Sets integer id of the bee
          *
-         * @param string $type
+         * @param int
          */
         protected function setBeeId($id)
         {
@@ -63,21 +65,31 @@
         }
 
         /**
-         * @return $type
+         *  Returns unique integer id of the bee
+         *
+         * @return int
          */
         public function getBeeId()
         {
             return $this->id;
         }
 
-        protected function getDefaultHitpointsByType($type)
+        /**
+         * Gets the default hitpoints for each bee type in accordance
+         * with the game rules
+         *
+         * @param  string $type i.e. worker, drone, queen
+         * @return int
+         */
+        public function getDefaultHitpointsByType($type)
         {
             return $this->hitpoints_by_type[$type];
         }
 
         /**
-         * Type of bee object
+         * Updated the current hitpoints of the bee
          *
+         * @param int $hitpoints
          * @param string $type
          */
         public function setBeeHitpoints($hitpoints = null, $type = null)
@@ -90,7 +102,9 @@
         }
 
         /**
-         * @return $type
+         * Returns the current hitpoints for the bee
+         *
+         * @return int
          */
         public function getBeeHitpoints()
         {
@@ -98,8 +112,8 @@
         }
 
         /**
-         * [deductHP description]
-         * @return [type] [description]
+         * Sets the bees hitpoints to be the current value minus the
+         * damage taken after a hit is recorded
          */
         public function deductHP()
         {
