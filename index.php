@@ -1,14 +1,29 @@
 <?php
     namespace Game;
 
-    use Game\Models\Model;
     use Game\Views\View;
-    use Game\Controllers\DisplayController;
+    use Game\Controllers\GameController;
+    use Game\Helpers\DataHandler;
 
     require "vendor/autoload.php";
 
-    $model = new Model();
-    $controller = new DisplayController($model);
+    $game_controller = new GameController();
+    $game_controller->initializeGame();
 
-    new View($controller, $model);
+    $data_handler = new DataHandler();
+
+    if (isset($_SESSION)) {
+        $game_data = $data_handler->formatSessionData($_SESSION);
+    }
+
+    $view = new View();
+    $view->render(
+        'index.html.php',
+        [
+            'game_data' => $game_data,
+            'counts' => $data_handler->getCounts($game_data),
+            'hit_count' => $data_handler->getHitCount($_SESSION),
+            'last_hit' => $data_handler->getLastHit($_SESSION)
+        ]
+    );
 ?>
