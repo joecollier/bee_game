@@ -1,18 +1,24 @@
 <?php
-    namespace Game\Views;
+namespace Game\Views;
 
+/**
+* The application view
+*/
+class View
+{
     /**
-    * The application view
-    */
-    class View
+     * Renders data for browser
+     *
+     * @param string $template_file path to template file
+     * @param array  $vars          array of variables used by template
+     */
+    public function render($template_file, array $vars = [])
     {
-       public function render($template_file, array $vars = [])
-       {
-          ob_start();
-          extract($vars);
+        ob_start();
+        extract($vars);
 
-          $template_file = __DIR__ . '/' . $template_file;
+        $template_file = __DIR__ . '/' . $template_file;
 
-          require($template_file);
-       }
+        require($template_file);
     }
+}
