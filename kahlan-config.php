@@ -25,8 +25,50 @@ Filter::apply($this, 'patchers', 'api.patchers');
 //  */
 Filter::register('app.coverage', function($chain) {
     $reporters = $this->reporters();
-
+    if ($this->args()->exists('coverage')) {
+        // Limit the Coverage analysis to only a couple of directories only
+        $coverage = new Coverage([
+                'verbosity' => $this->args()->get('coverage'),
+                'driver' => new \kahlan\reporter\coverage\driver\Xdebug(),
+                'path' => [
+                    'src'
+                ]
+        ]);
+        $reporters->add('coverage', $coverage);
+    }
     return $reporters;
 });
+// Filter::register('app.coverage', function($chain) {
+//     $reporters = $this->reporters();
+
+//     var_dump(extension_loaded('xdebug'));
+//     die();
+
+//     if (!extension_loaded('xdebug')) {
+//         return;
+//     }
+
+//     $coverage = new Coverage([
+//             'verbosity' => $this->args()->get('coverage'),
+//             'driver' => new Xdebug(),
+//             'path' => [
+//                 'src'
+//             ]
+//     ]);
+
+//     // if ($this->args()->exists('coverage')) {
+//     //     // Limit the Coverage analysis to only a couple of directories only
+//     //     $coverage = new Coverage([
+//     //             'verbosity' => $this->args()->get('coverage'),
+//     //             'driver' => new \kahlan\reporter\coverage\driver\Xdebug(),
+//     //             'path' => [
+//     //                 'src'
+//     //             ]
+//     //     ]);
+//     //     $reporters->add('coverage', $coverage);
+//     // }
+
+//     return $reporters;
+// });
 
 Filter::apply($this, 'coverage', 'app.coverage');

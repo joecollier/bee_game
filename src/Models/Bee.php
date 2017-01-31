@@ -25,32 +25,14 @@ class Bee
     public $hitpoints;
 
     /**
-     * Config of values for damage taken by bee type
-     * @var array $damage_taken_by_type
-     */
-    protected $damage_taken_by_type = [
-        'queen' => 8,
-        'drone' => 12,
-        'worker' => 10
-    ];
-
-    /**
-     * Config of values default HP by bee type
-     * @var array $hitpoints_by_type
-     */
-    protected $hitpoints_by_type = [
-        'drone' => 50,
-        'queen' => 100,
-        'worker' => 75
-    ];
-
-    /**
      * @param string  $type      i.e. drone, worker, queen
      * @param integer $id
      * @param integer $hitpoints
      */
-    public function __construct($type = 'drone', $id = 0, $hitpoints = -1)
+    public function __construct($config = null, $type = 'drone', $id = 0, $hitpoints = -1)
     {
+        $this->config = $config;
+
         $this->setBeeType($type);
         $this->setBeeId($id);
         $this->setBeeHitpoints($hitpoints, $type);
@@ -105,7 +87,7 @@ class Bee
      */
     public function getDefaultHitpointsByType($type)
     {
-        return $this->hitpoints_by_type[$type];
+        return $this->config[$type]['total_hitpoints'];
     }
 
     /**
@@ -139,7 +121,7 @@ class Bee
      */
     public function deductHP()
     {
-        $new_hp = $this->getBeeHitpoints() - $this->damage_taken_by_type[$this->getBeeType()];
+        $new_hp = $this->getBeeHitpoints() - $this->config[$this->getBeeType()]['damage_taken'];
         $new_hp = ($new_hp > 0)
             ? $new_hp
             : 0;

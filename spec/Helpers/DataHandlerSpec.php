@@ -7,7 +7,25 @@
     describe(DataHandler::class, function () {
         $this->handler = new DataHandler();
 
-        $game_controller = new GameController();
+        $config = [
+            'drone' => [
+                'count' => 8,
+                'damage_taken' => 12,
+                'total_hitpoints' => 50
+            ],
+            'queen' => [
+                'count' => 1,
+                'damage_taken' => 8,
+                'total_hitpoints' => 100
+            ],
+            'worker' => [
+                'count' => 5,
+                'damage_taken' => 10,
+                'total_hitpoints' => 75
+            ]
+        ];
+
+        $game_controller = new GameController($config);
         $this->data = ['game_data' => $game_controller->buildBees(), 'hit_count' => 0];
 
         describe('formatSessionData', function () {

@@ -7,7 +7,12 @@
 
     require "vendor/autoload.php";
 
-    $game_controller = new GameController();
+    $config = file_get_contents('src/Config/config.json');
+    $config = json_decode($config, true);
+
+    var_export($config);
+
+    $game_controller = new GameController($config);
     $game_controller->initializeGame();
 
     $data_handler = new DataHandler();
