@@ -1,6 +1,6 @@
 {
     "drone": {
-        "count": 8,
+        "count": 6,
         "damage_taken": 12,
         "total_hitpoints": 50
     },
@@ -10,7 +10,7 @@
         "total_hitpoints": 100
     },
     "worker": {
-        "count": 5,
+        "count": 9,
         "damage_taken": 10,
         "total_hitpoints": 75
     }

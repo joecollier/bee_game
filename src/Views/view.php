@@ -17,6 +17,8 @@ class View
         ob_start();
         extract($vars);
 
+        // var_export(json_encode($vars['game_data'][1]));
+
         $template_file = __DIR__ . '/' . $template_file;
 
         require($template_file);

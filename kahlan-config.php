@@ -29,7 +29,7 @@ Filter::register('app.coverage', function($chain) {
         // Limit the Coverage analysis to only a couple of directories only
         $coverage = new Coverage([
                 'verbosity' => $this->args()->get('coverage'),
-                'driver' => new \kahlan\reporter\coverage\driver\Xdebug(),
+                'driver' => new Xdebug(),
                 'path' => [
                     'src'
                 ]

@@ -15,7 +15,8 @@
         "psr-4": {
             "Game\\Models\\": "src/Models/",
             "Game\\Views\\": "src/Views/",
-            "Game\\Controllers\\": "src/Controllers/"
+            "Game\\Controllers\\": "src/Controllers/",
+            "Game\\Helpers\\": "src/Helpers/"
         }
     }
 }
