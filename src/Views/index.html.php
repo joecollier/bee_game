@@ -4,34 +4,52 @@
         <link rel='stylesheet' type='text/css' href='assets/main.css' />
     </head>
     <body>
-        <script type="text/javascript">
-            // 'game_data' => $game_data,
-            // 'counts' => $data_handler->getCounts($game_data),
-            // 'hit_count' => $data_handler->getHitCount($_SESSION),
-            // 'last_hit' => $data_handler->getLastHit($_SESSION),
-            // 'bee_image' => [
-            //     'drone' => 'drone.jpg',
-            //     'queen' => 'queen.jpg',
-            //     'worker' => 'worker.jpg'
-            // ]
+        <div id="container">
+            <center>
+                <div id="title">Welcome to the Bee Game!</div>
+                <div id='bee-counts' style='height:220px;'>
+                    <?php
+                        if ($counts['queen'] > 0) {
+                            echo "<div style='height:100%;'><div>";
 
-            var game_data = <?php echo json_encode($game_data); ?>;
+                            $last_type = '';
 
-            // game_data.forEach(function(current_bee) {
-            //     console.log(current_bee);
-            // });
+                            foreach ($game_data as $bee) {
+                                $div_clear = '';
+                                $bold = '';
 
-            for (var i = 0; i < Object.keys(game_data).length; i++) {
-                // var obj = game_data[i];
+                                $type = $bee->type;
 
-                console.log(game_data[i]);
-            }
+                                if ($type !== $last_type) {
+                                    echo "<br>";
+                                }
 
-            // console.log(game_data);
-        </script>
-        <div id="game-container">
-            <div id="game-board-container">1</div>
-            <div id="game-stats-container">2</div>
+                                if ($last_hit == $type) {
+                                    $bold = '-bold';
+                                }
+
+                                $count = $counts[$type];
+
+                                if ($type !== $last_type) {
+                                    echo "<div class='bee-status-type{$bold}'>Remaining {$type}s:</div>";
+                                }
+                                echo "<div class='bee-cell'>" . $bee->hitpoints . "</div>";
+
+                                $last_type = $type;
+                            }
+
+                            echo "</div><div id='hit-button'><div>{$hit_count} hits</div>";
+                        } else {
+                            echo "<div style='height:100%;'>Game completed in {$hit_count} hits</div>";
+                        }
+                    ?>
+                    <div>
+                        <form method="post" action="index.php">
+                            <input id="button" type="submit" value="hit" name="submit">
+                        </form>
+                    </div>
+                </div>
+            </center>
         </div>
     </body>
 </html>

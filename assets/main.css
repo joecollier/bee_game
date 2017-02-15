@@ -37,17 +37,41 @@ body {
 }
 
 .bee-status-type {
-    width:30%;
     float:left;
+    display:inline-flex;
+    clear:both;
+    height:30px;
+    width:30%;
 }
 
 .bee-status-type-bold {
-    width:30%;
     float:left;
-    font-weight: bold;
+    display:inline-flex;
+    clear:both;
+    height:30px;
+    width:30%;
+    font-weight:bold;
 }
 
 .bee-status-count {
     width:70%;
     float:left;
+}
+
+.bee-cell {
+    font-size:32px;
+    color:rgba(255, 255, 255, 0.8);
+    height:30px;
+    width:30px;
+    padding: 0 20px 0 0;
+    float:left;
+    background-image: url('bee_1.gif');
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+}
+
+#hit-button {
+    float:left;
+    width:100%;
+    padding-top:20px;
 }
