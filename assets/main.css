@@ -60,7 +60,8 @@ body {
 
 .bee-cell {
     font-size:32px;
-    color:rgba(255, 255, 255, 0.8);
+    color:rgba(255, 255, 255, 0.6);
+   -webkit-text-stroke: 0.02em rgba(0, 0, 0, 1.0);
     height:30px;
     width:30px;
     padding: 0 20px 0 0;
