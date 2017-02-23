@@ -2,6 +2,7 @@ body {
     background-color: rgba(248, 183, 65, 1.0);
     margin: 2px;
     padding: 2px;
+    font-family: Menlo,monospace;
 }
 
 #game-container {
@@ -42,6 +43,7 @@ body {
     clear:both;
     height:30px;
     width:30%;
+    padding-top: 10px;
 }
 
 .bee-status-type-bold {
@@ -51,6 +53,7 @@ body {
     height:30px;
     width:30%;
     font-weight:bold;
+    padding-top: 10px;
 }
 
 .bee-status-count {
