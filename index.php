@@ -23,16 +23,6 @@ if (isset($_SESSION)) {
 }
 
 $template = $twig->load('game.html');
-$template_params = [
-    'game_data' => $game_data,
-    'counts' => $data_handler->getCounts($game_data),
-    'hit_count' => $data_handler->getHitCount($_SESSION),
-    'last_hit' => $data_handler->getLastHit($_SESSION),
-    'bee_image' => [
-        'drone' => 'drone.jpg',
-        'queen' => 'queen.jpg',
-        'worker' => 'worker.jpg'
-    ]
-];
+$template_data = $data_handler->getDataForTemplate($game_data, $_SESSION);
 
-echo $template->render($template_params);
+echo $template->render($template_data);

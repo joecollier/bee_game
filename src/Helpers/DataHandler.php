@@ -7,6 +7,14 @@ namespace Game\Helpers;
  */
 class DataHandler
 {
+    // public function __construct(
+    //     $game_data,
+    //     $session_data
+    // ) {
+    //     $this->game_data = $game_data;
+    //     $this->session_data = $session_data;
+    // }
+
     /**
      * Current counts for each by type
      * @var array $counts
@@ -75,5 +83,39 @@ class DataHandler
         return isset($data['last_hit_type'])
             ? $data['last_hit_type']
             : null;
+    }
+
+    /**
+     * Builds data array containing filenames for be images
+     *
+     * @return array
+     */
+    protected function getBeeImageAssetData()
+    {
+        return [
+            'drone' => 'drone.jpg',
+            'queen' => 'queen.jpg',
+            'worker' => 'worker.jpg'
+        ];
+    }
+
+    /**
+     * Returns data params for template
+     *
+     * @param array $game_data
+     * @param array $session_data
+     * @return array $data
+     */
+    public function getDataForTemplate($game_data, $session_data)
+    {
+        $data = [
+            'game_data' => $game_data,
+            'counts' => $this->getCounts($game_data),
+            'hit_count' => $this->getHitCount($_SESSION),
+            'last_hit' => $this->getLastHit($_SESSION),
+            'bee_image' => $this->getBeeImageAssetData()
+        ];
+
+        return $data;
     }
 }
