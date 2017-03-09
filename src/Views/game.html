@@ -1,0 +1,50 @@
+<DOCTYPE html>
+<html>
+    <head>
+        <link rel='stylesheet' type='text/css' href='assets/main.css' />
+    </head>
+    <body>
+        <div id="container">
+            <center>
+                <div id="title">Welcome to the Bee Game!</div>
+                <div id='bee-counts' style='height:220px;'>
+                {% set last_type = '' %}
+                {% set last_hit = '' %}
+                    {% if counts.queen > 0 %}
+                        {% for bee in game_data %}
+                            {% set div_clear = '' %}
+                            {% set bold = '' %}
+                            {% set type = bee.type %}
+
+                            {% if type is not same as(last_type) %}
+                                <br>
+                            {% endif %}
+
+                            {% if type is same as(last_hit_type) %}
+                                {% set bold = '-bold' %}
+                            {% endif %}
+
+                            {% set count = counts[type] %}
+
+                            {% if type is not same as(last_type) %}
+                                <div class='bee-status-type{{ bold }}'>Remaining {{ type }}s:</div>
+                            {% endif %}
+
+                            <div class='bee-cell'>{{ bee.hitpoints }}</div>
+
+                            {% set last_type = type %}
+                        {% endfor %}
+                        </div><div id='hit-button'><div>{{ hit_count }} hits</div>
+                    {% else %}
+                        <div style='height:100%;'>Game completed in {{ hit_count }} hits</div>
+                    {% endif %}
+                    <div>
+                        <form method="post" action="index.php">
+                            <input id="button" type="submit" value="hit" name="submit">
+                        </form>
+                    </div>
+                </div>
+            </center>
+        </div>
+    </body>
+</html>

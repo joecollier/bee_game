@@ -1,37 +1,28 @@
 <?php
-    namespace Game;
+namespace Game;
 
-    use Game\Views\View;
-    use Game\Controllers\GameController;
-    use Game\Helpers\DataHandler;
+use Game\Views\View;
+use Game\Controllers\GameController;
+use Game\Helpers\DataHandler;
 
-    require "vendor/autoload.php";
+require "vendor/autoload.php";
 
-    $config = file_get_contents('src/Config/config.json');
-    $config = json_decode($config, true);
+$config = file_get_contents('src/Config/config.json');
+$config = json_decode($config, true);
 
-    $game_controller = new GameController($config);
-    $game_controller->initializeGame();
+$loader = new \Twig_Loader_Filesystem('src/Views/');
+$twig = new \Twig_Environment($loader, []);
 
-    $data_handler = new DataHandler();
+$game_controller = new GameController($config);
+$game_controller->initializeGame();
 
-    if (isset($_SESSION)) {
-        $game_data = $data_handler->formatSessionData($_SESSION);
-    }
+$data_handler = new DataHandler();
 
-    $view = new View();
-    $view->render(
-        'index.html.php',
-        [
-            'game_data' => $game_data,
-            'counts' => $data_handler->getCounts($game_data),
-            'hit_count' => $data_handler->getHitCount($_SESSION),
-            'last_hit' => $data_handler->getLastHit($_SESSION),
-            'bee_image' => [
-                'drone' => 'drone.jpg',
-                'queen' => 'queen.jpg',
-                'worker' => 'worker.jpg'
-            ]
-        ]
-    );
-?>
+if (isset($_SESSION)) {
+    $game_data = $data_handler->formatSessionData($_SESSION);
+}
+
+$template = $twig->load('game.html');
+$template_data = $data_handler->getDataForTemplate($game_data, $_SESSION);
+
+echo $template->render($template_data);
