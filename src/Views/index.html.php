@@ -10,7 +10,7 @@
                 <div id='bee-counts' style='height:220px;'>
                     <?php
                         if ($counts['queen'] > 0) {
-                            echo "<div style='height:100%;'><div>";
+                            echo "<div id='top-div'><div>";
 
                             $last_type = '';
 
@@ -40,7 +40,7 @@
 
                             echo "</div><div id='hit-button'><div>{$hit_count} hits</div>";
                         } else {
-                            echo "<div style='height:100%;'>Game completed in {$hit_count} hits</div>";
+                            echo "<div id='hit-counter'>Game completed in {$hit_count} hits</div>";
                         }
                     ?>
                     <div>
