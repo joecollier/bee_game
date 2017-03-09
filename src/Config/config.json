@@ -1,0 +1,17 @@
+{
+    "drone": {
+        "count": 6,
+        "damage_taken": 12,
+        "total_hitpoints": 50
+    },
+    "queen": {
+        "count": 1,
+        "damage_taken": 8,
+        "total_hitpoints": 100
+    },
+    "worker": {
+        "count": 9,
+        "damage_taken": 10,
+        "total_hitpoints": 75
+    }
+}

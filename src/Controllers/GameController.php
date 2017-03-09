@@ -10,17 +10,13 @@ use Game\Models\Bee;
 class GameController
 {
     /**
-     * Default values for number of bees
-     * Note: An improvement could be to move all of these default
-     * values to a centralized config file
-     *
-     * @var array
+     * Game Controller Constructor
+     * @param array $config
      */
-    protected $default_bee_counts = [
-        'drone' => 8,
-        'queen' => 1,
-        'worker' => 5
-    ];
+    public function __construct($config = null)
+    {
+        $this->config = $config;
+    }
 
     /**
      * Builds array containing bee objects
@@ -30,9 +26,11 @@ class GameController
         $i = 0;
         $id = 1;
 
-        foreach ($this->default_bee_counts as $bee_type => $count) {
+        foreach ($this->config as $bee_type => $bee) {
+            $count = $bee['count'];
+
             while ($i < $count) {
-                $bee = new Bee($bee_type, $id);
+                $bee = new Bee($this->config, $bee_type, $id);
                 $this->colony[$id] = $bee;
 
                 $i++;

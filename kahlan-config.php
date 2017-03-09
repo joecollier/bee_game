@@ -1,12 +1,11 @@
 <?php
-use Kahlan\Filter\Filter as Filter;
-use Kahlan\Jit\Interceptor;
-use Kahlan\Reporter\Coverage;
-use Kahlan\Reporter\Coverage\Driver\Xdebug;
-use Kahlan\Jit\Patcher\Layer;
+use kahlan\filter\Filter as Filter;
+use kahlan\jit\Interceptor;
+use kahlan\reporter\Coverage;
+use kahlan\jit\patcher\Layer;
 
 Filter::register('mycustom.namespaces', function($chain) {
-    $this->_autoloader->addPsr4('Game\\', __DIR__ . '/src');
+    $this->_autoloader->addPsr4('Editor\\', __DIR__ . '/src');
 });
 
 Filter::apply($this, 'namespaces', 'mycustom.namespaces');
@@ -25,6 +24,18 @@ Filter::apply($this, 'patchers', 'api.patchers');
 //  */
 Filter::register('app.coverage', function($chain) {
     $reporters = $this->reporters();
+
+    if ($this->args()->exists('coverage')) {
+        // Limit the Coverage analysis to only a couple of directories only
+        $coverage = new Coverage([
+                'verbosity' => $this->args()->get('coverage'),
+                'driver' => new \kahlan\reporter\coverage\driver\Xdebug(),
+                'path' => [
+                    'src'
+                ]
+        ]);
+        $reporters->add('coverage', $coverage);
+    }
 
     return $reporters;
 });

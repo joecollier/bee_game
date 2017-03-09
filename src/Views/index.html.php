@@ -10,17 +10,35 @@
                 <div id='bee-counts' style='height:220px;'>
                     <?php
                         if ($counts['queen'] > 0) {
-                            echo "<div style='height:100%;'>Status<div>";
-                            foreach ($counts as $type => $count) {
+                            echo "<div style='height:100%;'><div>";
+
+                            $last_type = '';
+
+                            foreach ($game_data as $bee) {
+                                $div_clear = '';
                                 $bold = '';
+
+                                $type = $bee->type;
+
+                                if ($type !== $last_type) {
+                                    echo "<br>";
+                                }
+
                                 if ($last_hit == $type) {
                                     $bold = '-bold';
                                 }
 
-                                echo "<div class='bee-status-type{$bold}'>Remaining {$type}s:</div>";
-                                echo "<div class='bee-status-count'>{$count}</div>";
+                                $count = $counts[$type];
+
+                                if ($type !== $last_type) {
+                                    echo "<div class='bee-status-type{$bold}'>Remaining {$type}s:</div>";
+                                }
+                                echo "<div class='bee-cell'>" . $bee->hitpoints . "</div>";
+
+                                $last_type = $type;
                             }
-                            echo "<div>{$hit_count} hits</div>";
+
+                            echo "</div><div id='hit-button'><div>{$hit_count} hits</div>";
                         } else {
                             echo "<div style='height:100%;'>Game completed in {$hit_count} hits</div>";
                         }

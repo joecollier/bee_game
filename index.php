@@ -7,7 +7,10 @@
 
     require "vendor/autoload.php";
 
-    $game_controller = new GameController();
+    $config = file_get_contents('src/Config/config.json');
+    $config = json_decode($config, true);
+
+    $game_controller = new GameController($config);
     $game_controller->initializeGame();
 
     $data_handler = new DataHandler();
@@ -23,7 +26,12 @@
             'game_data' => $game_data,
             'counts' => $data_handler->getCounts($game_data),
             'hit_count' => $data_handler->getHitCount($_SESSION),
-            'last_hit' => $data_handler->getLastHit($_SESSION)
+            'last_hit' => $data_handler->getLastHit($_SESSION),
+            'bee_image' => [
+                'drone' => 'drone.jpg',
+                'queen' => 'queen.jpg',
+                'worker' => 'worker.jpg'
+            ]
         ]
     );
 ?>

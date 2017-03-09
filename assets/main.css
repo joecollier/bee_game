@@ -1,7 +1,28 @@
-#container {
-    width: 480px;
-    height: 360px;
+body {
+    background-color: rgba(248, 183, 65, 1.0);
+    margin: 2px;
+    padding: 2px;
+    font-family: Menlo,monospace;
+}
+
+#game-container {
+    width: 960px;
+    height: 460px;
+}
+
+#game-stats-container {
+    float:left;
+    width: 20%;
+    height: 100%;
     border: 1px solid black;
+}
+
+#game-board-container {
+    float:left;
+    width: 50%;
+    height: 100%;
+    margin-right: 1%;
+    border: 1px solid white;
 }
 
 #button {
@@ -17,17 +38,44 @@
 }
 
 .bee-status-type {
-    width:30%;
     float:left;
+    display:inline-flex;
+    clear:both;
+    height:30px;
+    width:30%;
+    padding-top: 10px;
 }
 
 .bee-status-type-bold {
-    width:30%;
     float:left;
-    font-weight: bold;
+    display:inline-flex;
+    clear:both;
+    height:30px;
+    width:30%;
+    font-weight:bold;
+    padding-top: 10px;
 }
 
 .bee-status-count {
     width:70%;
     float:left;
+}
+
+.bee-cell {
+    font-size:32px;
+    color:rgba(255, 255, 255, 0.6);
+   -webkit-text-stroke: 0.02em rgba(0, 0, 0, 1.0);
+    height:30px;
+    width:30px;
+    padding: 0 20px 0 0;
+    float:left;
+    background-image: url('bee_1.gif');
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+}
+
+#hit-button {
+    float:left;
+    width:100%;
+    padding-top:20px;
 }

@@ -3,8 +3,26 @@
     use Game\Models\Bee;
 
     describe(Bee::class, function () {
+        $this->config = [
+            'drone' => [
+                'count' => 8,
+                'damage_taken' => 12,
+                'total_hitpoints' => 50
+            ],
+            'queen' => [
+                'count' => 1,
+                'damage_taken' => 8,
+                'total_hitpoints' => 100
+            ],
+            'worker' => [
+                'count' => 5,
+                'damage_taken' => 10,
+                'total_hitpoints' => 75
+            ]
+        ];
+
         $this->bee_type = 'worker';
-        $this->bee = new Bee($this->bee_type);
+        $this->bee = new Bee($this->config, $this->bee_type);
 
         it('creates bee object of the worker type', function () {
             expect($this->bee->getBeeType())->toBe($this->bee_type);
