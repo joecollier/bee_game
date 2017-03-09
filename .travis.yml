@@ -4,4 +4,4 @@ php:
   - 5.5
 
 script:
-  ./vendor/crysalead/kahlan/bin/kahlan --cc=true
+  vendor/crysalead/kahlan/bin/kahlan --cc=true
