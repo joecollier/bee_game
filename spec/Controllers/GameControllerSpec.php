@@ -2,6 +2,7 @@
 namespace Game\Controllers;
 
 use Game\Models\Bee;
+use kahlan\plugin\Stub;
 
 describe(GameController::class, function () {
     describe('damageBee', function () {
@@ -35,6 +36,21 @@ describe(GameController::class, function () {
             $this->game_controller = new GameController($this->config, $this->bee);
             $this->game_controller->damageBee($this->bee);
             expect($this->bee->hitpoints)->toBe($expected_health_after_damage_taken);
+        });
+
+        it('Calls method on bee object to determine the bee\'s hitpoints', function () {
+            $type = 'queen';
+
+            $this->bee = new Bee($this->config, $type);
+
+            Stub::on($this->bee)
+                ->method('getBeeHitpoints')
+                ->andReturn(0);
+
+            $this->game_controller = new GameController($this->config, $this->bee);
+            $this->game_controller->damageBee($this->bee);
+
+            expect($this->bee)->toReceive('getBeeHitpoints');
         });
     });
 });

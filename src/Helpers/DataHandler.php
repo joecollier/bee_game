@@ -7,38 +7,15 @@ namespace Game\Helpers;
  */
 class DataHandler
 {
-    // public function __construct(
-    //     $game_data,
-    //     $session_data
-    // ) {
-    //     $this->game_data = $game_data;
-    //     $this->session_data = $session_data;
-    // }
-
     /**
      * Current counts for each by type
      * @var array $counts
      */
-    public $counts = [
+    protected $counts = [
         'drone' => 0,
         'queen' => 0,
         'worker' => 0
     ];
-
-    /**
-     * Formats the data for use by the view class
-     *
-     * @param array $data
-     * @return array|null
-     */
-    public function formatSessionData($data)
-    {
-        if (isset($data['game_data'])) {
-            return $data['game_data'];
-        }
-
-        return null;
-    }
 
     /**
      * Returns a count from the game data to keep track of
@@ -48,7 +25,7 @@ class DataHandler
      * @param array $data
      * @return int
      */
-    public function getHitCount($data)
+    protected function getHitCount($data)
     {
         return $data['hit_count'];
     }
@@ -60,7 +37,7 @@ class DataHandler
      * @param array $game_data
      * @return array
      */
-    public function getCounts($game_data)
+    protected function getCounts($game_data)
     {
         if (!empty($game_data)) {
             foreach ($game_data as $data) {
@@ -78,7 +55,7 @@ class DataHandler
      * @param array $data
      * @return string|null
      */
-    public function getLastHit($data)
+    protected function getLastHit($data)
     {
         return isset($data['last_hit_type'])
             ? $data['last_hit_type']
@@ -100,6 +77,21 @@ class DataHandler
     }
 
     /**
+     * Formats the data for use by the view class
+     *
+     * @param array $data
+     * @return array
+     */
+    public function formatSessionData($data)
+    {
+        if (isset($data['game_data'])) {
+            return $data['game_data'];
+        }
+
+        return [];
+    }
+
+    /**
      * Returns data params for template
      *
      * @param array $game_data
@@ -108,14 +100,12 @@ class DataHandler
      */
     public function getDataForTemplate($game_data, $session_data)
     {
-        $data = [
+        return [
             'game_data' => $game_data,
             'counts' => $this->getCounts($game_data),
-            'hit_count' => $this->getHitCount($_SESSION),
-            'last_hit' => $this->getLastHit($_SESSION),
+            'hit_count' => $this->getHitCount($session_data),
+            'last_hit_type' => $this->getLastHit($session_data),
             'bee_image' => $this->getBeeImageAssetData()
         ];
-
-        return $data;
     }
 }
