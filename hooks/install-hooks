@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# symlink commit message hook
+ln -sf ../../hooks/commit-msg .git/hooks/commit-msg
+ln -sf ../../hooks/pre-commit .git/hooks/pre-commit
+chmod +x hooks/pre-commit
+chmod +x hooks/commit-msg

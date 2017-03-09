@@ -18,5 +18,16 @@
             "Game\\Controllers\\": "src/Controllers/",
             "Game\\Helpers\\": "src/Helpers/"
         }
+    },
+    "config": {
+        "bin-dir": "bin/"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "./hooks/install-hooks"
+        ],
+        "post-update-cmd": [
+            "./hooks/install-hooks"
+        ]
     }
 }
