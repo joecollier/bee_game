@@ -5,6 +5,10 @@ body {
     font-family: Menlo,monospace;
 }
 
+#top-div {
+    height: 100%;
+}
+
 #game-container {
     width: 960px;
     height: 460px;
@@ -78,4 +82,8 @@ body {
     float:left;
     width:100%;
     padding-top:20px;
+}
+
+#hit-counter {
+    height:100%;
 }

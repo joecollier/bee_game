@@ -1,0 +1,104 @@
+#!/usr/bin/env ruby
+#
+# Git commit-msg hook. If your branch name is in the form "feature/blah"
+# it automatically adds the prefix "[blah]" to commit
+# messages.
+#
+# Example
+# =======
+#
+#    git checkout -b feature/blah
+#    git commit -m "new stuff"
+#    git log    => will show up "[blah] new stuff"
+#
+# If you include "#noref" in the commit message, nothing will be added to the
+# commit message, and the "#noref" itself will be stripped.
+#
+# Example
+# =======
+#
+#    git commit -m "don't prefix this message #noref"
+#    git log    => will show up "don't prefix this message"
+#
+#
+# --
+# adapted from https://gist.github.com/EmmanuelOga/2926764
+
+# Convert a message to include branch name information.
+class Transmogrifier < Struct.new(:message, :branchname)
+
+  NOREF_MATCHER = /#noref/
+  PREFIX_MATCHER = /\A(.*)\/(.*)/
+  PREFIX_FORMAT = "[%s] %s"
+
+  def prefix
+    (branchname.match(PREFIX_MATCHER).to_a.last || branchname).strip
+  end
+
+  def to_s
+    return message unless prefix =~ /\S/
+
+      if message =~ NOREF_MATCHER
+        output = message.gsub(NOREF_MATCHER, "")
+
+      elsif message.include?(prefix)
+        output = message
+
+      else
+        output = PREFIX_FORMAT % [prefix, message]
+      end
+
+    output.squeeze(" ").strip
+  end
+end
+
+# Overwrites the file which holds the commit message with a fancier one.
+def run!
+  branchname = `git branch --no-color 2> /dev/null`[/^\* (.+)/, 1].to_s
+  message_path = ARGV.first
+  message = File.read(message_path).strip.chomp
+
+  File.open(message_path, 'w') {|f| f.write Transmogrifier.new(message, branchname)}
+end
+
+if ARGV.first != "testing"
+  run!
+
+else
+  ################################################################################
+  # TESTS
+  ################################################################################
+
+  puts "This will commit stuff to your repo! Do you want to proceed? [yes/n]: "
+  abort unless $stdin.gets.chomp.downcase == "yes"
+
+  require 'shellwords'
+
+  def change_branch(name)
+    `git checkout -B #{name}`
+  end
+
+  def commit(msg)
+    `echo 'testing' >> a; git add a; git commit -m #{msg.shellescape}`
+  end
+
+  def top_message
+    `git log --format="%s" -n1`.chomp
+  end
+
+  def assert_equal(a, b)
+    abort "\nFailure!\n#{a.inspect} != #{b.inspect}\n#{caller.join("\n")}" unless a == b
+  end
+
+  def commit_and_check(msg, expected_message)
+    commit(msg)
+    assert_equal(top_message, expected_message)
+  end
+
+  change_branch("feature/some-cool-feature")
+  commit_and_check("new stuff", "[some-cool-feature] new stuff")
+  commit_and_check("[some-cool-feature] new stuff", "[some-cool-feature] new stuff")
+  commit_and_check("don't mess with me #noref", "don't mess with me")
+
+  puts "\nAll tests passed."
+end
