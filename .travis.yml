@@ -1,0 +1,7 @@
+language: php
+
+php:
+  - 5.5
+
+script:
+  ./vendor/crysalead/kahlan/bin/kahlan --cc=true
